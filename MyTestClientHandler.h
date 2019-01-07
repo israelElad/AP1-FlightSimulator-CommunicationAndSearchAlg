@@ -1,4 +1,4 @@
-//Client handler(will read client messages and handle them) for testing infrastructure.
+// Client handler(will read client messages and handle them) for testing infrastructure.
 
 #ifndef PROJECT2_MYTESTCLIENTHANDLER_H
 #define PROJECT2_MYTESTCLIENTHANDLER_H
