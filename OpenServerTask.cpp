@@ -20,7 +20,6 @@ void OpenServerTask::doTask() {
     int socketFd, newSockFd, clientLen;
     char buffer[1024];
     struct sockaddr_in serv_addr{}, cli_addr{};
-    int n;
     // First call to socket() function
     socketFd = socket(AF_INET, SOCK_STREAM, 0);
     if (socketFd < 0) {
