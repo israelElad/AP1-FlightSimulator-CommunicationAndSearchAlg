@@ -76,4 +76,5 @@ string MyTestClientHandler<P, S>::readLineFromSocket(int socketFd) {
     return buffer;
 }
 
+template class MyTestClientHandler<string,string>;
 
