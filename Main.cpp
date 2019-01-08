@@ -6,17 +6,16 @@
 using namespace std;
 
 
-int mainProgram(int argc, char *argv) {
+int main(int argc, char *argv[]) {
+    Solver<string, string> *solver = new StringReverser<string, string>();
+    CacheManager<string, string> *cacheManager = new FileCacheManager<string, string>();
+    ClientHandler *clientHandler = MyTestClientHandler<string, string>(solver, cacheManager);
+    int port = argv[0];
+    Server *server = new MySerialServer();
+    server->open(port, clientHandler);
 
-            Solver<string, string> *solver = new StringReverser<string, string>();
-            CacheManager<string, string> *cacheManager = new FileCacheManager<string, string>();
-            ClientHandler *clientHandler = MyTestClientHandler<string, string>(solver, cacheManager);
-            int port = argv[0];
-            Server *server = new MySerialServer();
-            server->open(port, clientHandler);
-
-            return 0;
-        }
+    return 0;
+}
 
 
 
