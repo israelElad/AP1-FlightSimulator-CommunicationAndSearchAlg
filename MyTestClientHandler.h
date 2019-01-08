@@ -6,6 +6,8 @@
 #include "ClientHandler.h"
 #include "CacheManager.h"
 #include "Solver.h"
+#include <string>
+
 
 template<typename P, typename S>
 class MyTestClientHandler :public ClientHandler{
@@ -13,9 +15,10 @@ class MyTestClientHandler :public ClientHandler{
 private:
     Solver<P,S> solver;
     CacheManager<P,S> cacheManager;
+    std::string readLineFromSocket(int socketFd);
 public:
     MyTestClientHandler(const Solver<P, S> &solver, const CacheManager<P, S> &cacheManager);
-    virtual void handleClient(istream istream1, ostream ostream1);
+    virtual void handleClient(int socketFd);
 };
 
 

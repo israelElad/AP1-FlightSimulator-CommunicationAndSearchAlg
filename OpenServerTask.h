@@ -7,6 +7,7 @@
 
 
 #include "Task.h"
+#include "ClientHandler.h"
 
 /**
  * A task which opens a server
@@ -14,8 +15,9 @@
 class OpenServerTask: public Task {
     bool shouldStop=false;
     int port;
+    ClientHandler *clientHandler;
 public:
-    explicit OpenServerTask(int port);
+    explicit OpenServerTask(int port,ClientHandler *clientHandler);
     void doTask();
 };
 
