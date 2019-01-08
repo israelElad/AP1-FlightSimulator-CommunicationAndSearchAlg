@@ -5,12 +5,11 @@
 
 using namespace std;
 
-
 int main(int argc, char *argv[]) {
     Solver<string, string> *solver = new StringReverser<string, string>();
     CacheManager<string, string> *cacheManager = new FileCacheManager<string, string>();
     ClientHandler *clientHandler = MyTestClientHandler<string, string>(solver, cacheManager);
-    int port = argv[0];
+    int port = stoi(argv[1]);
     Server *server = new MySerialServer();
     server->open(port, clientHandler);
 
