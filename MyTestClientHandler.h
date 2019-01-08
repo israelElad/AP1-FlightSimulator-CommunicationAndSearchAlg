@@ -17,9 +17,9 @@ class MyTestClientHandler :public ClientHandler{
 public:
     MyTestClientHandler(Solver<string, string>* solver, CacheManager* cacheManager);
 
-    virtual void handleClient(int socketFd);
+    virtual void handleClient(int newSocketFd);
 
-    string readLineFromSocket(int socketFd);
+    string readLineFromSocket(int newSocketFd);
 };
 
 

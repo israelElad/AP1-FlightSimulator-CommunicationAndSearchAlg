@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <string>
 #include <algorithm>
+#include <iostream>
 #include "OpenServerTask.h"
 
 using namespace std;
@@ -18,10 +19,10 @@ OpenServerTask::OpenServerTask(int port,ClientHandler *clientHandler) {
 }
 
 void OpenServerTask::doTask() {
+    cout<< "bla"<<endl;
     //    //TODO:shouldStop
     while (!shouldStop) {
-        int socketFd, newSockFd, clientLen;
-        char buffer[1024];
+        int socketFd, newSocketFd, clientLen;
         struct sockaddr_in serv_addr{}, cli_addr{};
         int n;
         // First call to socket() function
@@ -48,13 +49,14 @@ void OpenServerTask::doTask() {
         listen(socketFd, 5);
         clientLen = sizeof(cli_addr);
         // Accept actual connection from the client
-        newSockFd = accept(socketFd, (struct sockaddr *) &cli_addr, (socklen_t *) &clientLen);
-        if (newSockFd < 0) {
+        newSocketFd = accept(socketFd, (struct sockaddr *) &cli_addr, (socklen_t *) &clientLen);
+        if (newSocketFd < 0) {
             perror("ERROR on accept");
             return;
         }
+        cout<<"connected"<<endl;
 
-        this->clientHandler->handleClient(socketFd);
+        this->clientHandler->handleClient(newSocketFd);
     }
 
 }

@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
     int port = stoi(argv[1]);
     Server *server = new MySerialServer();
     server->open(port, clientHandler);
-
+    while(true){}
     return 0;
 }
 

@@ -12,8 +12,6 @@ namespace server_side {
 
         // close the server
         virtual void stop() = 0;
-
-        // todo: another methods ?
     };
 }
 

@@ -4,12 +4,13 @@
 
 #include "Solver.h"
 #include <string>
+#include <algorithm>
 
 class StringReverser : public Solver<string, string> {
 public:
     // Solve a problem
     virtual string solve(string problem){
-        problem.reserve();
+        reverse(problem.begin(), problem.end());
         return problem;
     }
 };
