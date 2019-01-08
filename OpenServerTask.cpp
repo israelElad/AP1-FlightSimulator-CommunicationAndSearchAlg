@@ -19,7 +19,7 @@ OpenServerTask::OpenServerTask(int port,ClientHandler *clientHandler) {
 
 void OpenServerTask::doTask() {
     //    //TODO:shouldStop
-    while (shouldStop == false) {
+    while (!shouldStop) {
         int socketFd, newSockFd, clientLen;
         char buffer[1024];
         struct sockaddr_in serv_addr{}, cli_addr{};

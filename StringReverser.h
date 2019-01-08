@@ -5,8 +5,7 @@
 #include "Solver.h"
 #include <string>
 
-template<typename P, typename S>
-class StringReverser : public Solver<P, S> {
+class StringReverser : public Solver<string, string> {
 public:
     // Solve a problem
     virtual string solve(string problem){

@@ -6,9 +6,9 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-    Solver<string, string> *solver = new StringReverser<string, string>();
-    CacheManager<string, string> *cacheManager = new FileCacheManager<string, string>();
-    ClientHandler *clientHandler = MyTestClientHandler<string, string>(solver, cacheManager);
+    Solver<string, string> *solver = new StringReverser();
+    CacheManager *cacheManager = new FileCacheManager();
+    ClientHandler *clientHandler = new MyTestClientHandler(solver, cacheManager);
     int port = stoi(argv[1]);
     Server *server = new MySerialServer();
     server->open(port, clientHandler);
