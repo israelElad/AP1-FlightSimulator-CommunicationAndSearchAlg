@@ -7,9 +7,9 @@
 
 using namespace std;
 
-template<typename S, typename T, typename C>
+template<typename T, typename C>
 
-class Searcher : public ISearcher<S, T, C> {
+class Searcher : public ISearcher<T, C> {
 // members
 private:
     int numberOfNodesEvaluated{};
@@ -34,14 +34,14 @@ public:
     }
 
     // abstract method search
-    virtual S search(const ISearchable<T, C> &searchable) = 0;
+    virtual vector<State<T, C>> search(ISearchable<T, C> &searchable) = 0;
 
     // add new state to OpenList
     void addToOpenList(State<T, C> newState) {
         this->openList.push(newState);
     }
 
-    S  backTrace(){
+    vector<State<T, C>> backTrace() {
 
     }
 

@@ -4,11 +4,11 @@
 
 #include "ISearchable.h"
 
-template<typename S, typename T, typename C>
+template<typename T, typename C>
 
 class ISearcher {
 // the search method
-    virtual S search(const ISearchable<T,C> &searchable) = 0;
+    virtual vector<State<T,C>> search(ISearchable<T,C> &searchable) = 0;
 
 // get how many nodes were evaluated by the algorithm
     virtual int getNumberOfNodesEvaluated() = 0;

@@ -5,12 +5,10 @@
 #include <unordered_set>
 #include "Searcher.h"
 
-using namespace std;
+template<typename T, typename C>
 
-template<typename S, typename T, typename C>
-
-class BestFirstSearch : public Searcher<S, T, C> {
-    virtual S search(ISearchable<T, C> &searchable) {
+class BestFirstSearch : public Searcher<T, C> {
+    virtual vector<State<T,C>> search(ISearchable<T, C> &searchable) {
         this->addToOpenList(searchable.getInitialState());
         unordered_set<State<T, C>> closedSet; // a set of states already evaluated
         // while openList is not empty
