@@ -10,7 +10,7 @@ using namespace std;
 class ClientHandler {
 public:
     // from istream1 we read the client messages and to ostream1 we write the answers of the server
-    virtual void handleClient(istream istream1, ostream ostream1) = 0;
+    virtual void handleClient(int socketFd) = 0;
 };
 
 #endif //PROJECT2_CLIENTHANDLER_H

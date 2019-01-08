@@ -39,7 +39,7 @@ public:
         }
     }
 
-    string MyTestClientHandler<P, S>::readLineFromSocket(int socketFd) {
+    string readLineFromSocket(int socketFd) {
         //todo: improve if there is time
 //    std::string line;
 //    char buf[1024];
