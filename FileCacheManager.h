@@ -17,7 +17,7 @@ public:
     // check if the solution to the problem is already saved
     virtual bool isSaved(const string &problem);
 
-    // get the solution. The user have to check if the solution isSaved before get it.
+    // get the solution. The user have to check if the solution isSaved cameFrom get it.
     virtual string getSolution(const string &problem);
 
     // save the solution to the problem
