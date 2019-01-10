@@ -42,8 +42,6 @@ void OpenServerTask::doTask() {
         return;
     }
 
-    //todo: interval
-
     /* Now start listening for the clients, here process will go in sleep mode and
      * will wait for the incoming connection */
     listen(socketFd, 5);
@@ -57,7 +55,6 @@ void OpenServerTask::doTask() {
 
     //    //TODO:shouldStop
     while (!shouldStop) {
-
 
         newSocketFd = accept(socketFd,  (struct sockaddr *) &cli_addr, (socklen_t *) &clientLen);
         if (newSocketFd < 0)	{
