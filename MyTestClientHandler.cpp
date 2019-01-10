@@ -18,6 +18,7 @@ void MyTestClientHandler::handleClient(int newSocketFd) {
         } else {
             string solution = this->solver->solve(buffer);
             this->cacheManager->saveSolution(buffer, solution);
+            send(newSocketFd, solution.c_str(), solution.length(), 0);
         }
 //        fflush(ostream1); todo
         buffer=readLineFromSocket(newSocketFd);
@@ -50,6 +51,10 @@ string MyTestClientHandler::readLineFromSocket(int newSocketFd) {
     while (true)   {
         n = static_cast<int>(read(newSocketFd, &c, 1));
         if (n < 0) {
+            if(errno == EWOULDBLOCK){
+                cout<<"reading timeout, trying again"<<endl;
+                continue;
+            }
             perror("ERROR reading from socket");
             return nullptr;
         }   else if (n == 0)    {

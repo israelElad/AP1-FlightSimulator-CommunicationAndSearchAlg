@@ -16,6 +16,7 @@ public:
     explicit RunnableTask(Task* task);
     //run task
     virtual void run();
+    virtual void stop();
 };
 
 

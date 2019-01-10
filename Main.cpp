@@ -12,6 +12,11 @@ int main(int argc, char *argv[]) {
     int port = stoi(argv[1]);
     Server *server = new MySerialServer();
     server->open(port, clientHandler);
+    cout<<"opened"<<endl;
+//    server->stop();
+//    cout<<"stop server"<<endl;
+//    sleep(500);
+//    cout<<"after stop server"<<endl;
     while(true){}
     return 0;
 }

@@ -8,12 +8,12 @@
 
 void MySerialServer::open(int port, ClientHandler *clientHandler) {
     //creates thread will run a runnable task which is OpenServerTask
-    Thread thread(new RunnableTask(new OpenServerTask(port,clientHandler)));
+    this->thread=Thread(new RunnableTask(new OpenServerTask(port,clientHandler)));
     //start running the server
-    thread.start();
+    this->thread.start();
 
 }
 
 void MySerialServer::stop() {
-
+ this->thread.stop();
 }

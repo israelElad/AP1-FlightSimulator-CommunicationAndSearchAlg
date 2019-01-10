@@ -15,6 +15,7 @@ public:
     static void* threadFunc(void* n);
     Thread(Runnable *runnable);
     void start();
+    void stop();
 };
 
 

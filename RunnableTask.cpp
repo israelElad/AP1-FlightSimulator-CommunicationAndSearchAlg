@@ -9,3 +9,7 @@ RunnableTask::RunnableTask(Task* task) {
 void RunnableTask::run() {
     this->task->doTask();
 }
+
+void RunnableTask::stop() {
+    this->task->stopTask();
+}

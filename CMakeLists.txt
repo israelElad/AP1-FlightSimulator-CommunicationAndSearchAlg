@@ -7,4 +7,5 @@ SET(CMAKE_CXX_FLAGS -pthread)
 
 add_executable(project2 Server.h MySerialServer.cpp MySerialServer.h ClientHandler.h MyTestClientHandler.h Solver.h
         CacheManager.h FileCacheManager.h StringReverser.h Thread.cpp Thread.h Runnable.h RunnableTask.cpp
-        RunnableTask.h Task.h OpenServerTask.cpp OpenServerTask.h Main.cpp MyTestClientHandler.cpp FileCacheManager.cpp ISearchable.h ISearcher.h Searcher.h State.h BestFirstSearch.h)
+        RunnableTask.h Task.h OpenServerTask.cpp OpenServerTask.h Main.cpp MyTestClientHandler.cpp FileCacheManager
+        .cpp ISearchable.cpp ISearchable.h ISearcher.cpp ISearcher.h Searcher.h State.h BestFirstSearch.h MyParallelServer.cpp MyParallelServer.h)

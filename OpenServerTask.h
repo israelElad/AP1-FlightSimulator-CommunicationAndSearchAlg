@@ -19,6 +19,7 @@ class OpenServerTask: public Task {
 public:
     explicit OpenServerTask(int port,ClientHandler *clientHandler);
     void doTask();
+    void stopTask();
 };
 
 
