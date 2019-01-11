@@ -6,9 +6,9 @@ class Cell {
     int i;
     int j;
 public:
+    Cell(int i, int j);
     int getI();
     int getJ();
-    Cell(int i, int j);
 };
 
 

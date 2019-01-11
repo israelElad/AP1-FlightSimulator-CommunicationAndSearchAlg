@@ -35,17 +35,6 @@ vector<State<Cell, double>> Matrix::getAllPossibleStates(State<Cell, double> sta
     return allPossibleStates;
 }
 
-Matrix::Matrix(int n, vector<vector<double>> &values, State<Cell, double> initialState,
-               State<Cell, double> goalState) {
-    this->n = n;
-    this->values = values;
-    this->initialState = initialState;
-    this->initialState.setCost(0);
-    this->goalState = goalState;
-    this->goalState.setCost(this->getValue(this->goalState.getState()));
-
-}
-
 double Matrix::getValue(Cell cell) {
     return this->values[cell.getI()][cell.getJ()];
 }

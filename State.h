@@ -3,7 +3,8 @@
 
 #include <string>
 #include <limits>
-
+#include "State.h"
+#include "Cell.h"
 
 using namespace std;
 
@@ -12,10 +13,10 @@ template<typename T, typename C>
 class State {
     T state;
     C cost;
-    State<T, C> cameFrom;
+    State<T, C> *cameFrom;
 
 public:
-    explicit State(T state) {
+    explicit State(T state):state(state) {
         this->state = state;
         this->cameFrom = nullptr;
         this->cost =numeric_limits<C>::infinity();
@@ -43,7 +44,7 @@ public:
 
     // get the state we came from
     State<T, C> getCameFrom() {
-        return cameFrom;
+        return *cameFrom;
     }
 
     // set the state we came from
