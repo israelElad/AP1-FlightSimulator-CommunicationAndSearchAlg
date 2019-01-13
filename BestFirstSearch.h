@@ -3,33 +3,40 @@
 
 
 #include <unordered_set>
+#include <set>
 #include "Searcher.h"
 
 template<typename T, typename C>
 
 class BestFirstSearch : public Searcher<T, C> {
-    virtual vector<State<T, C>> search(ISearchable<T, C> &searchable) { //todo:solution ?
-        this->addToOpenPriorityQueue(searchable.getInitialState());
-        unordered_set<State<T, C>> closedSet; // a set of states already evaluated
+    virtual vector<State<T, C> *> search(ISearchable<T, C> *searchable) { //todo:solution ?
+        this->addToOpenPriorityQueue(searchable->getInitialState());
+        //unordered_set<State<T, C>> closedSet; // a set of states already evaluated
+        set<State<T, C> *> closedSet;
         // while openPriorityQueue is not empty
-        while (this->openPriorityQueueSize() > 0) {
+        while (!this->openPriorityQueue.empty()) {
             // Remove the best node from OPEN
-            State<T, C> n = this->popOpenPriorityQueue();
+            State<T, C> *n = this->openPriorityQueue.top();
+            this->openPriorityQueue.pop();
             closedSet.insert(n);
-            if (n == searchable.getIGoallState()) {
-                return backTrace(n, searchable);
+            if (*n == *searchable->getIGoallState()) {
+                return this->backTrace(n, searchable);
             }
             // calling the delegated method, returns a vector of states with n as a parent
-            vector<State<T, C>> succerssors = searchable.getAllPossibleStates(n); //todo:set ?
-            for (State<T, C> s : succerssors) {
+            vector<State<T, C> *> successors = searchable->getAllPossibleStates(n); //todo:set ?
+            for (State<T, C> *s : successors) {
                 //  If s is not in CLOSED and s is not in OPEN
-                if ((!closedSet.count(s)) && (!this->openPriorityQueueContaines(s))) {
-                    s.setCameFrom(n);
-                    s.setCost(s.getCost() + s.getCameFrom().getCost());
+                if ((!setContains(closedSet, s)) && (!this->openPriorityQueueContains(s))) {
+                    s->setCameFrom(n);
+                    s->setCost(s->getCost() + s->getCameFrom()->getCost());
                     this->addToOpenPriorityQueue(s);
                 } else {
-                    if (!closedSet.count(s)) {
-                        if ((s.getCost() < this->getStateFromOpenPriorityQueue(s).getCost()) {
+                    if (!setContains(closedSet, s)) {
+                        s->setCameFrom(n);
+                        s->setCost(s->getCost() + s->getCameFrom()->getCost());
+                        double sOCost = this->getStateFromOpenPriorityQueue(s)->getCost();
+                        double sCost = s->getCost();
+                        if (s->getCost() < this->getStateFromOpenPriorityQueue(s)->getCost()) {
                             this->openPriorityQueue.remove(s); // we remove n with bigger cost
                             this->addToOpenPriorityQueue(s); // we add n with chipper cost
                         }
@@ -37,7 +44,15 @@ class BestFirstSearch : public Searcher<T, C> {
                 }
             }
         }
-        return nullptr;
+    }
+
+    bool setContains(set<State<T, C> *> set1, State<T, C> *s) {
+        for (State<T, C> *s1 : set1) {
+            if (*s == *s1) {
+                return true;
+            }
+        }
+        return false;
     }
 };
 

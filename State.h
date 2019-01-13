@@ -28,8 +28,8 @@ public:
     }
 
     // check if stateA < stateB
-    bool operator<(const State<T, C> &other) {
-        return this->cost < other.cost;
+    bool operator<(const State<T, C>* other) const {
+        return this->cost < other->getCost();
     }
 
     // get state
@@ -43,18 +43,18 @@ public:
     }
 
     // get the state we came from
-    State<T, C> getCameFrom() {
-        return *cameFrom;
+    State<T, C>* getCameFrom() {
+        return cameFrom;
     }
 
     // set the state we came from
-    void setCameFrom(const State<T, C> &newCameFrom) {
-        this->cameFrom = cameFrom;
+    void setCameFrom(State<T, C>* newCameFrom) {
+        this->cameFrom = newCameFrom;
     }
 
     // set cost
     void setCost(C cost) {
-        State::cost = cost;
+        this->cost = cost;
     }
 
     // hash func for State

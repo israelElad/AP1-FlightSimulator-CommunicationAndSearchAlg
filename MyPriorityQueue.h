@@ -7,11 +7,23 @@
 
 using namespace std;
 
-template<typename T>
+template<typename T, typename C>
 
-class MyPriorityQueue : public std::priority_queue<T, std::vector<T>> {
+struct CompareCost : public std::binary_function<State<T,C>*, State<T,C>*, bool>
+{
+    bool operator()(State<T,C>* lhs, State<T,C>* rhs) const
+    {
+        return lhs->getCost() > rhs->getCost();
+    }
+};
+
+template<typename T, typename C>
+
+class MyPriorityQueue : public std::priority_queue<State<T, C>*, vector<State<T, C>*>, CompareCost<T, C>> {
+
 public:
-    bool remove(const T &value) {
+
+    bool remove(State<T, C>* &value) {
         auto it = std::find(this->c.begin(), this->c.end(), value);
         if (it != this->c.end()) {
             this->c.erase(it);

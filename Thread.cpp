@@ -1,7 +1,3 @@
-//
-// Created by elad on 07/01/19.
-//
-
 #include <pthread.h>
 #include <iostream>
 #include "Thread.h"
