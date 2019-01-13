@@ -1,42 +1,43 @@
+#include <thread>
 #include "MySerialServer.h"
 #include "MyTestClientHandler.h"
 #include "StringReverser.h"
 #include "FileCacheManager.h"
-#include "Matrix.h"
-#include "BestFirstSearch.h"
+#include "MyParallelServer.h"
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
-    vector<vector<double>> values = {{0,  1,  2,  3},
-                                     {4,  5,  6,  7},
-                                     {8,  9,  10, 11},
-                                     {12, 13, 14, 15}};
-    Cell c1 = Cell(0, 0);
-    auto * s = new State<Cell, double>(c1);
-    Cell c2 = Cell(3, 3);
-    auto * e = new State<Cell, double>(c2);
-    Matrix matrix = Matrix(4, values, s, e);
-    ISearcher<Cell, double> *b = new BestFirstSearch<Cell, double>();
-    b->search(&matrix);
-}
-
-
-
-//    Solver<string, string> *solver = new StringReverser();
-//    CacheManager *cacheManager = new FileCacheManager();
-//    ClientHandler *clientHandler = new MyTestClientHandler(solver, cacheManager);
-//    int port = stoi(argv[1]);
-//    Server *server = new MySerialServer();
-//    server->open(port, clientHandler);
-//    cout<<"opened"<<endl;
 //
-////    server->stop();
-////    cout<<"stop server"<<endl;
-////    sleep(500);
-////    cout<<"after stop server"<<endl;
-//    while(true){}
-//    return 0;
+//    vector<vector<double>> values = {{0,  1,  2,  3},
+//                                     {4,  5,  6,  7},
+//                                     {8,  9,  10, 11},
+//                                     {12, 13, 14, 15}};
+//    Cell c1 = Cell(0, 0);
+//    auto * s = new State<Cell, double>(c1);
+//    Cell c2 = Cell(3, 3);
+//    auto * e = new State<Cell, double>(c2);
+//    Matrix matrix = Matrix(4, values, s, e);
+//    ISearcher<Cell, double> *b = new BestFirstSearch<Cell, double>();
+//    b->search(&matrix);
+
+
+    Solver<string, string> *solver = new StringReverser();
+    CacheManager *cacheManager = new FileCacheManager();
+    ClientHandler *clientHandler = new MyTestClientHandler(solver, cacheManager);
+    int port = stoi(argv[1]);
+    AbstractServer* abstractServer=new MyParallelServer();
+    Server* serial= abstractServer;
+
+    thread serverThread(&Server::open,serial,port, clientHandler);
+    sleep(30);
+    serial->stop();
+    cout<<"opened"<<endl;
+
+    while(true){
+    }
+    return 0;
+}
 
 
 

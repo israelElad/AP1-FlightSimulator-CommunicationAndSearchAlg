@@ -2,18 +2,34 @@
  * Serial Server - Server who can deal with one client at a time
  */
 #include "MySerialServer.h"
-#include "Thread.h"
-#include "OpenServerTask.h"
-#include "RunnableTask.h"
+#include <netinet/in.h>
+#include <cstdio>
+#include <strings.h>
+#include <unistd.h>
+#include <string>
+#include <algorithm>
+#include <iostream>
 
 void MySerialServer::open(int port, ClientHandler *clientHandler) {
-    //creates thread will run a runnable task which is OpenServerTask
-    this->thread=Thread(new RunnableTask(new OpenServerTask(port,clientHandler)));
-    //start running the server
-    this->thread.start();
+    this->port=port;
+    this->clientHandler=clientHandler;
+    setUpServer();
 
-}
-
-void MySerialServer::stop() {
- this->thread.stop();
+    while (!shouldStop) {
+        newSocketFd = accept(socketFd,  (struct sockaddr *) &cli_addr, (socklen_t *) &clientLen);
+        if (newSocketFd < 0)	{
+            if (errno == EWOULDBLOCK)	{
+                cout << "timeout!" << endl;
+                continue;
+            }	else	{
+                perror("other error");
+                continue;
+            }
+        }
+        cout<<"connected"<<endl;
+        //handle client, when finished, move on to the next client.
+        this->clientHandler->handleClient(newSocketFd);
+    }
+    cout<<"server closed"<<endl;
+    close(socketFd);
 }

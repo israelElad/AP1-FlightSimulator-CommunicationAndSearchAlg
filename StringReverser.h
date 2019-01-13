@@ -11,6 +11,9 @@ public:
     // Solve a problem
     virtual string solve(string problem){
         reverse(problem.begin(), problem.end());
+        cout<<"reversed- waiting"<<endl;
+        sleep(5);
+        cout<<"after sleep"<<endl;
         return problem;
     }
 };

@@ -7,7 +7,9 @@ MyTestClientHandler::MyTestClientHandler(Solver<string, string> *solver, CacheMa
 }
 
 void MyTestClientHandler::handleClient(int newSocketFd) {
+    cout<<"entered handle client"<<endl;
     string buffer=readLineFromSocket(newSocketFd);
+    cout<<"after readline"<<endl;
 
     while (strcmp(buffer.c_str(), "end") != 0) {
         bool checkResult = this->cacheManager->isSaved(buffer);
@@ -23,6 +25,8 @@ void MyTestClientHandler::handleClient(int newSocketFd) {
 //        fflush(ostream1); todo
         buffer=readLineFromSocket(newSocketFd);
     }
+    //close client socket
+    close(newSocketFd);
 }
 
 string MyTestClientHandler::readLineFromSocket(int newSocketFd) {
@@ -42,6 +46,7 @@ string MyTestClientHandler::readLineFromSocket(int newSocketFd) {
 //        }
 //
 //        line += buf;
+    cout<<"in readline"<<endl;
 
     //read line into buffer
     char buffer[1024];
@@ -69,3 +74,4 @@ string MyTestClientHandler::readLineFromSocket(int newSocketFd) {
     buffer[idx] = 0;
     return buffer;
 }
+
