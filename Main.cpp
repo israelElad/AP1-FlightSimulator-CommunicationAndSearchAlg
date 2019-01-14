@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
     Solver<ISearchable<Cell, double>*, vector<State<Cell, double> *>> *solver = new
             SolverSearcherAdapter<vector<State<Cell, double> *>, Cell, double>(b);
 
-    solver->solve(matrix);
+    vector<State<Cell, double> *> v = solver->solve(matrix);
 }
 
 //

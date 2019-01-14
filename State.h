@@ -16,10 +16,10 @@ class State {
     State<T, C> *cameFrom;
 
 public:
-    explicit State(T state):state(state) {
+    explicit State(T state) : state(state) {
         this->state = state;
         this->cameFrom = nullptr;
-        this->cost =numeric_limits<C>::infinity();
+        this->cost = numeric_limits<C>::infinity();
     }
 
     // check if stateA equal to stateB
@@ -28,7 +28,7 @@ public:
     }
 
     // check if stateA < stateB
-    bool operator<(const State<T, C>* other) const {
+    bool operator<(const State<T, C> *other) const {
         return this->cost < other->getCost();
     }
 
@@ -43,12 +43,12 @@ public:
     }
 
     // get the state we came from
-    State<T, C>* getCameFrom() {
+    State<T, C> *getCameFrom() {
         return cameFrom;
     }
 
     // set the state we came from
-    void setCameFrom(State<T, C>* newCameFrom) {
+    void setCameFrom(State<T, C> *newCameFrom) {
         this->cameFrom = newCameFrom;
     }
 
@@ -58,11 +58,11 @@ public:
     }
 
     // hash func for State
-    int operator()(const string &key) const {
-        hash<string> string_hash;
-        string data = to_string(this->state) + to_string(this->cost); //todo: +camefrom ?
-        return string_hash(data);
-    }
+//    int operator()(const string &key) const {
+//        hash<string> string_hash;
+//        string data = to_string(this->state) + to_string(this->cost); //todo: +camefrom ?
+//        return string_hash(data);
+//    }
 };
 
 
