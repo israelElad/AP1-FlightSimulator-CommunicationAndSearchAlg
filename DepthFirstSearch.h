@@ -34,7 +34,7 @@ public:
             // calling the delegated method, returns a vector of states with n as a parent
             vector<State<T, C> *> successors = searchable->getAllPossibleStates(n);
             for (State<T, C> *s : successors) {
-                if ((this->visited.count(s) == 0) && (s->getCost() != -1)) {
+                if (!visitedContains(s) && (s->getCost() != -1)) {
                     s->setCameFrom(n);
                     this->stackStates.push(s);
                     this->visited.insert(s);
@@ -53,6 +53,16 @@ public:
         }
         reverse(path.begin(), path.end());
         return path;
+    }
+
+    // go over visited
+    bool visitedContains(State<T, C> *s) {
+        for (State<T, C> *s1 : this->visited) {
+            if (*s == *s1) {
+                return true;
+            }
+        }
+        return false;
     }
 };
 
