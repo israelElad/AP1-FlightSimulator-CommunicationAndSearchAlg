@@ -7,13 +7,15 @@
 
 using namespace std;
 
+template<typename P, typename S>
+
 class CacheManager {
 public:
-    virtual bool isSaved(const string &problem) = 0;
+    virtual bool isSaved(P problem) = 0;
 
-    virtual string getSolution(const string &problem) = 0;
+    virtual S getSolution(P problem) = 0;
 
-    virtual void saveSolution(const string &problem, const string &solution) = 0;
+    virtual void saveSolution(P problem, S solution) = 0;
 };
 
 #endif //PROJECT2_CACHEMANAGER_H

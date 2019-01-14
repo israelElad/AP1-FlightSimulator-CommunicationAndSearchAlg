@@ -1,34 +1,44 @@
 #include "Matrix.h"
 
-State<Cell, double>* Matrix::getInitialState() {
+Matrix::Matrix(int n, int m, vector<vector<double>> &values, State<Cell, double> *initialState,
+               State<Cell, double> *goalState) : initialState(initialState), goalState(goalState) {
+    this->n = n;
+    this->m = m;
+    this->values = values;
+    this->initialState->setCost(0);
+    this->goalState->setCost(this->getValue(this->goalState->getState()));
+
+}
+
+State<Cell, double> *Matrix::getInitialState() {
     return this->initialState;
 }
 
-State<Cell, double>* Matrix::getIGoallState() {
+State<Cell, double> *Matrix::getIGoallState() {
     return this->goalState;
 }
 
-vector<State<Cell, double>*> Matrix::getAllPossibleStates(State<Cell, double>* state) {
-    vector<State<Cell, double>*> allPossibleStates;
+vector<State<Cell, double> *> Matrix::getAllPossibleStates(State<Cell, double> *state) {
+    vector<State<Cell, double> *> allPossibleStates;
     int i = state->getState().getI();
     int j = state->getState().getJ();
-    if (i + 1 < n) {
-        State<Cell, double>* s = new State<Cell, double>(Cell(i + 1, j));
+    if (i + 1 < this->n) {
+        State<Cell, double> *s = new State<Cell, double>(Cell(i + 1, j));
         s->setCost(this->getValue(s->getState()));
         allPossibleStates.push_back(s);
     }
-    if (j + 1 < n) {
-        State<Cell, double>* s = new State<Cell, double>(Cell(i, j + 1));
+    if (j + 1 < this->m) {
+        State<Cell, double> *s = new State<Cell, double>(Cell(i, j + 1));
         s->setCost(this->getValue(s->getState()));
         allPossibleStates.push_back(s);
     }
     if (i - 1 >= 0) {
-        State<Cell, double>* s = new State<Cell, double>(Cell(i - 1, j));
+        State<Cell, double> *s = new State<Cell, double>(Cell(i - 1, j));
         s->setCost(this->getValue(s->getState()));
         allPossibleStates.push_back(s);
     }
     if (j - 1 >= 0) {
-        State<Cell, double>* s = new State<Cell, double>(Cell(i, j - 1));
+        State<Cell, double> *s = new State<Cell, double>(Cell(i, j - 1));
         s->setCost(this->getValue(s->getState()));
         allPossibleStates.push_back(s);
     }

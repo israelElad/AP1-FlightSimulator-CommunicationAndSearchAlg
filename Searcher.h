@@ -8,9 +8,9 @@
 
 using namespace std;
 
-template<typename T, typename C>
+template<typename S, typename T, typename C>
 
-class Searcher : public ISearcher<T, C> {
+class Searcher : public ISearcher<S, T, C> {
 // members
 private:
     int numberOfNodesEvaluated{};
@@ -36,22 +36,22 @@ public:
     }
 
     // abstract method search
-    virtual vector<State<T, C>*> search(ISearchable<T, C> *searchable) = 0;
+    virtual S search(ISearchable<T, C> *searchable) = 0;
 
     // add new state to openPriorityQueue
-    void addToOpenPriorityQueue(State<T, C>* newState) {
+    void addToOpenPriorityQueue(State<T, C> *newState) {
         this->openPriorityQueue.push(newState);
     }
 
     // go from the end of the path to the beginning and create a path
-    vector<State<T, C>*> backTrace(State<T, C>* goallState, ISearchable<T, C> *searchable) {
-        vector<State<T, C>*> path;
+    vector<State<T, C> *> backTrace(State<T, C> *goallState, ISearchable<T, C> *searchable) {
+        vector<State<T, C> *> path;
         path.push_back(goallState);
         while (!(*goallState == *searchable->getInitialState())) {
             path.push_back(goallState->getCameFrom());
             goallState = goallState->getCameFrom();
         }
-        // todo:reverse
+        reverse(path.begin(), path.end());
         return path;
     }
 
@@ -60,7 +60,7 @@ public:
 
         MyPriorityQueue<T, C> copy = this->openPriorityQueue;
         while (!copy.empty()) {
-            State<T, C>* state1 = copy.top();
+            State<T, C> *state1 = copy.top();
             copy.pop();
             if (*state == *state1) {
                 return true;
@@ -70,10 +70,10 @@ public:
     }
 
     // get state from openPriorityQueue
-    State<T, C>* getStateFromOpenPriorityQueue(State<T, C>* state) {
+    State<T, C> *getStateFromOpenPriorityQueue(State<T, C> *state) {
         MyPriorityQueue<T, C> copy = this->openPriorityQueue;
         while (!copy.empty()) {
-            State<T, C>* state1 = copy.top();
+            State<T, C> *state1 = copy.top();
             copy.pop();
             if (*state == *state1) {
                 return state1;

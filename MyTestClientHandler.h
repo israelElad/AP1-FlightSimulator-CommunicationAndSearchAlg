@@ -3,19 +3,15 @@
 #ifndef PROJECT2_MYTESTCLIENTHANDLER_H
 #define PROJECT2_MYTESTCLIENTHANDLER_H
 
-#include "ClientHandler.h"
 #include "CacheManager.h"
 #include "Solver.h"
-#include <iostream>
-#include <cstring>
-#include <unistd.h>
-#include <sys/socket.h>
+#include "ClientHandler.h"
 
-class MyTestClientHandler :public ClientHandler{
-    Solver<string,string>* solver;
-    CacheManager* cacheManager;
+class MyTestClientHandler : public ClientHandler {
+    Solver<string, string> *solver;
+    CacheManager<string, string> *cacheManager;
 public:
-    MyTestClientHandler(Solver<string, string>* solver, CacheManager* cacheManager);
+    MyTestClientHandler(Solver<string, string> *solver, CacheManager<string, string> *cacheManager);
 
     virtual void handleClient(int newSocketFd);
 

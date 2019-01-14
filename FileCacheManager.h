@@ -9,7 +9,7 @@
 
 using namespace std;
 
-class FileCacheManager : public CacheManager {
+class FileCacheManager : public CacheManager<string, string> {
     unordered_map<string, string> problemToSolution;
 public:
     FileCacheManager();

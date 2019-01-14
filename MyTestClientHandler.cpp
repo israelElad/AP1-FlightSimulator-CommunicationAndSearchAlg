@@ -1,7 +1,13 @@
+#include <sys/socket.h>
+#include <iostream>
+#include <cstring>
+#include <unistd.h>
 #include "MyTestClientHandler.h"
+#include "CacheManager.h"
+#include "Solver.h"
 
 
-MyTestClientHandler::MyTestClientHandler(Solver<string, string> *solver, CacheManager *cacheManager) {
+MyTestClientHandler::MyTestClientHandler(Solver<string, string> *solver, CacheManager<string, string> *cacheManager) {
     this->solver = solver;
     this->cacheManager = cacheManager;
 }
@@ -22,7 +28,6 @@ void MyTestClientHandler::handleClient(int newSocketFd) {
             this->cacheManager->saveSolution(buffer, solution);
             send(newSocketFd, solution.c_str(), solution.length(), 0);
         }
-//        fflush(ostream1); todo
         buffer=readLineFromSocket(newSocketFd);
     }
     //close client socket

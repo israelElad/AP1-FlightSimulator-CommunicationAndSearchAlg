@@ -7,7 +7,7 @@ using namespace std;
 
 class ClientHandler {
 public:
-    virtual void handleClient(int socketFd) = 0;
+    virtual void handleClient(int newSocketFd) = 0;
 };
 
 #endif //PROJECT2_CLIENTHANDLER_H

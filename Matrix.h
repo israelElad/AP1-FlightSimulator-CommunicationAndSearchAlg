@@ -9,19 +9,14 @@ using namespace std;
 
 class Matrix : public ISearchable<Cell, double> {
     int n;
+    int m;
     vector<vector<double>> values;
     State<Cell, double>* initialState;
     State<Cell, double>* goalState;
 
 public:
-    Matrix(int n, vector<vector<double>> &values, State<Cell, double>* initialState,
-                   State<Cell, double>* goalState) : initialState(initialState), goalState(goalState) {
-        this->n = n;
-        this->values = values;
-        this->initialState->setCost(0);
-        this->goalState->setCost(this->getValue(this->goalState->getState()));
-
-    }
+    Matrix(int n, int m, vector<vector<double>> &values, State<Cell, double>* initialState,
+                   State<Cell, double>* goalState);
 
     virtual State<Cell, double>* getInitialState();
 
