@@ -12,8 +12,10 @@
 using namespace std;
 
 class MyClientHandler : public ClientHandler {
+private:
     Solver<ISearchable<Cell, double>*, vector<State<Cell, double> *>> *solver;
     CacheManager<string, string> *cacheManager;
+    string pathVecToStrDirections(vector<State<Cell, double> *> &solutionVector);
 public:
     MyClientHandler(Solver<ISearchable<Cell, double>*, vector<State<Cell, double> *>> *solver, CacheManager<string, string> *cacheManager);
 

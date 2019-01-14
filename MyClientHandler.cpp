@@ -83,8 +83,7 @@ void MyClientHandler::handleClient(int newSocketFd) {
         send(newSocketFd, solution.c_str(), solution.length(), 0);
     } else {
         vector<State<Cell, double> *> solutionV = this->solver->solve(matrix);
-        //todo: convert the solution to up,down, etc...
-        string solution;
+        string solution=pathVecToStrDirections(solutionV);
         this->cacheManager->saveSolution(problemStr, solution);
         send(newSocketFd, solution.c_str(), solution.length(), 0);
     }
@@ -137,3 +136,25 @@ vector<double> MyClientHandler::separateDoublesByComma(string &row) {
     return separated;
 }
 
+string MyClientHandler::pathVecToStrDirections(vector<State<Cell, double> *> &solutionVector){
+    int iCurrent=solutionVector.at(0)->getState().getI();
+    int jCurrent=solutionVector.at(0)->getState().getJ();
+    string directions;
+    for(auto current=solutionVector.begin();current!=solutionVector.end();current++){
+        int iNext=(*current)->getState().getI();
+        int jNext=(*current)->getState().getJ();
+        if(iCurrent<iNext){ // below row- Down
+            directions+="Down,";
+        }else if(iCurrent>iNext){ //above row - Up
+            directions+="Up,";
+        }else if(jCurrent<jNext){ //right Cell - Right
+            directions+="Right,";
+        }else if(jCurrent>jNext){ //left Cell - Left
+            directions+="Left,";
+        }
+        iCurrent=iNext;
+        jCurrent=jNext;
+    }
+    directions.erase(directions.length()-1,1); // delete last ','
+    return directions;
+}

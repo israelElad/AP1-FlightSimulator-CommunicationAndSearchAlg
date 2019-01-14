@@ -9,9 +9,10 @@
 #include "ISearcher.h"
 #include "BestFirstSearch.h"
 #include "SolverSearcherAdapter.h"
-#include "DepthFirstSearch.h"
+#include "BreadthFirstSearch.h"
 
 using namespace std;
+
 
 int main(int argc, char *argv[]) {
     vector<vector<double>> values = {{0,  1,  2,  3},
@@ -24,13 +25,16 @@ int main(int argc, char *argv[]) {
     auto * e = new State<Cell, double>(c2);
     ISearchable<Cell, double>* matrix = new Matrix(4, 4, values, s, e);
 
-    ISearcher<vector<State<Cell, double> *>, Cell, double> *b = new DepthFirstSearch<Cell, double>();
+    ISearcher<vector<State<Cell, double> *>, Cell, double> *b = new BreadthFirstSearch<Cell, double>();
     Solver<ISearchable<Cell, double>*, vector<State<Cell, double> *>> *solver = new
             SolverSearcherAdapter<vector<State<Cell, double> *>, Cell, double>(b);
 
-    vector<State<Cell, double> *> v = solver->solve(matrix);
-    cout << "hi";
+
+    vector<State<Cell, double> *> solutionVector =solver->solve(matrix);
+    cout<<"hi"<<endl;
+
 }
+
 
 //
 //    Solver<string, string> *solver = new StringReverser();
