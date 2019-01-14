@@ -81,7 +81,6 @@ public:
 
     // go over openPriorityQueue
     bool openPriorityQueueContains(State<T, C> *state) {
-
         MyPriorityQueue<T, C> copy = this->openPriorityQueue;
         while (!copy.empty()) {
             State<T, C> *state1 = copy.top();

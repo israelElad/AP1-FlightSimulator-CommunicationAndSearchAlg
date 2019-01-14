@@ -1,17 +1,17 @@
-#ifndef PROJECT2_BREADTHFIRSTSEARCH_H
-#define PROJECT2_BREADTHFIRSTSEARCH_H
+#ifndef PROJECT2_DEPTHFIRSTSEARCH_H
+#define PROJECT2_DEPTHFIRSTSEARCH_H
 
 #include "ISearcher.h"
-#include <queue>
+#include <stack>
 #include <unordered_set>
 
 using namespace std;
 
 template<typename T, typename C>
 
-class BreadthFirstSearch : public ISearcher<vector<State<T, C> *>, T, C> {
+class DepthFirstSearch : public ISearcher<vector<State<T, C> *>, T, C> {
     int numberOfNodesEvaluated = 0;
-    queue<State<T, C> *> q;
+    stack<State<T, C> *> stackStates;
     unordered_set<State<T, C> *> visited;
 public:
     // get numberOfNodesEvaluated
@@ -20,13 +20,13 @@ public:
     }
 
     virtual vector<State<T, C> *> search(ISearchable<T, C> *searchable) {
-        this->q.push(searchable->getInitialState());
+        this->stackStates.push(searchable->getInitialState());
         this->visited.insert(searchable->getInitialState());
-        // while q is not empty
-        while (!this->q.empty()) {
-            // Remove the first state from q
-            State<T, C> *n = this->q.front();
-            this->q.pop();
+        // while stackStates is not empty
+        while (!this->stackStates.empty()) {
+            // Remove the first state from stackStates
+            State<T, C> *n = this->stackStates.top();
+            this->stackStates.pop();
             this->numberOfNodesEvaluated++;
             if (*n == *searchable->getIGoallState()) {
                 return this->backTrace(n, searchable);
@@ -36,7 +36,7 @@ public:
             for (State<T, C> *s : successors) {
                 if ((this->visited.count(s) == 0) && (s->getCost() != -1)) {
                     s->setCameFrom(n);
-                    this->q.push(s);
+                    this->stackStates.push(s);
                     this->visited.insert(s);
                 }
             }
@@ -57,4 +57,4 @@ public:
 };
 
 
-#endif //PROJECT2_BREADTHFIRSTSEARCH_H
+#endif //PROJECT2_DEPTHFIRSTSEARCH_H
