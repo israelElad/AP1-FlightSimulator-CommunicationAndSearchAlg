@@ -56,13 +56,6 @@ public:
     void setCost(C cost) {
         this->cost = cost;
     }
-
-    // hash func for State
-//    int operator()(const string &key) const {
-//        hash<string> string_hash;
-//        string data = to_string(this->state) + to_string(this->cost); //todo: +camefrom ?
-//        return string_hash(data);
-//    }
 };
 
 

@@ -3,7 +3,7 @@
 
 
 #include "Solver.h"
-#include "Searcher.h"
+#include "ISearcher.h"
 
 template<typename S, typename T, typename C>
 

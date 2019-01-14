@@ -50,7 +50,6 @@ int main(int argc, char *argv[]) {
 //}
 
 
-//todo
 //
 //namespace boot {
 //    class Main {
