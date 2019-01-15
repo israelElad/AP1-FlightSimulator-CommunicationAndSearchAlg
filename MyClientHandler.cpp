@@ -68,8 +68,8 @@ void MyClientHandler::handleClient(int newSocketFd) {
     string exitStr = dataFromClient.at(numOfMatrixRows + 1);
     problemStr.append("~" + exitStr); // "~" marks the beginning of exit state
     vector<double> exitStrSeparated = this->separateDoublesByComma(exitStr);
-    int i2 = static_cast<int>(startStrSeparated.at(0));
-    int j2 = static_cast<int>(startStrSeparated.at(1));
+    int i2 = static_cast<int>(exitStrSeparated.at(0));
+    int j2 = static_cast<int>(exitStrSeparated.at(1));
     Cell c2 = Cell(i2, j2);
     auto *e = new State<Cell, double>(c2);
     this->deathVector1.push_back(e);

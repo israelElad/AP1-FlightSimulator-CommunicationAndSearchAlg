@@ -63,6 +63,7 @@ namespace server_side {
 
             timeval timeout;
             timeout.tv_sec = 3;
+            //todo: change to 1
             timeout.tv_usec = 0;
 
             setsockopt(socketFd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout));
