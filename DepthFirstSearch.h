@@ -31,7 +31,14 @@ public:
             this->numberOfNodesEvaluated++;
             if (*n == *searchable->getIGoallState()) {
                 vector<State<Cell, double>*> backTraceV = this->backTrace(n, searchable);
-//                cout<<this->numberOfNodesEvaluated<<endl;
+
+                cout<<this->numberOfNodesEvaluated<<endl;
+                double c = 0;
+                for (State<Cell, double> *state: backTraceV) {
+                    c += state->getFirstCost();
+                }
+                cout << c << endl;
+
                 this->resetAllFields();
                 return backTraceV;
             }
@@ -51,14 +58,10 @@ public:
     vector<State<T, C> *> backTrace(State<T, C> *goallState, ISearchable<T, C> *searchable) {
         vector<State<T, C> *> path;
         path.push_back(goallState);
-        int cost=0;
         while (!(*goallState == *searchable->getInitialState())) {
-            cost+=goallState->getCost();
             path.push_back(goallState->getCameFrom());
             goallState = goallState->getCameFrom();
         }
-        cost+=goallState->getCost();
-        cout<<cost<<endl;
         reverse(path.begin(), path.end());
         return path;
     }

@@ -14,12 +14,14 @@ class State {
     T state;
     C cost;
     State<T, C> *cameFrom;
+    C firstCost;
 
 public:
     explicit State(T state) : state(state) {
         this->state = state;
         this->cameFrom = nullptr;
         this->cost = numeric_limits<C>::infinity();
+        this->firstCost = numeric_limits<C>::infinity();
     }
 
     // check if stateA equal to stateB
@@ -55,6 +57,14 @@ public:
     // set cost
     void setCost(C cost) {
         this->cost = cost;
+    }
+
+    void setFirstCost(C firstCost) {
+        State::firstCost = firstCost;
+    }
+
+    C getFirstCost() {
+        return firstCost;
     }
 };
 

@@ -5,8 +5,10 @@ Matrix::Matrix(int n, int m, vector<vector<double>> &values, State<Cell, double>
     this->n = n;
     this->m = m;
     this->values = values;
-    this->initialState->setCost(0);
+    this->initialState->setCost(this->getValue(this->initialState->getState()));
+    this->initialState->setFirstCost(this->getValue(this->initialState->getState()));
     this->goalState->setCost(this->getValue(this->goalState->getState()));
+    this->goalState->setFirstCost(this->getValue(this->goalState->getState()));
 
 }
 
@@ -26,24 +28,28 @@ vector<State<Cell, double> *> Matrix::getAllPossibleStates(State<Cell, double> *
         State<Cell, double> *s = new State<Cell, double>(Cell(i + 1, j));
         this->deathVector.push_back(s);
         s->setCost(this->getValue(s->getState()));
+        s->setFirstCost(this->getValue(s->getState()));
         allPossibleStates.push_back(s);
     }
     if (j + 1 < this->m) {
         State<Cell, double> *s = new State<Cell, double>(Cell(i, j + 1));
         this->deathVector.push_back(s);
         s->setCost(this->getValue(s->getState()));
+        s->setFirstCost(this->getValue(s->getState()));
         allPossibleStates.push_back(s);
     }
     if (i - 1 >= 0) {
         State<Cell, double> *s = new State<Cell, double>(Cell(i - 1, j));
         this->deathVector.push_back(s);
         s->setCost(this->getValue(s->getState()));
+        s->setFirstCost(this->getValue(s->getState()));
         allPossibleStates.push_back(s);
     }
     if (j - 1 >= 0) {
         State<Cell, double> *s = new State<Cell, double>(Cell(i, j - 1));
         this->deathVector.push_back(s);
         s->setCost(this->getValue(s->getState()));
+        s->setFirstCost(this->getValue(s->getState()));
         allPossibleStates.push_back(s);
     }
     return allPossibleStates;

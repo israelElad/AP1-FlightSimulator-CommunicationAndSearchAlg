@@ -21,9 +21,15 @@ public:
             this->numberOfNodesEvaluated++;
             this->closedSet.insert(n);
             if (*n == *searchable->getIGoallState()) {
-                vector<State<Cell, double>*> backTraceV = this->backTrace(n, searchable);;
-//                cout<<this->numberOfNodesEvaluated<<endl;
-                cout<<n->getCost()+n->getCameFrom()->getCost()<<endl;
+                vector<State<Cell, double> *> backTraceV = this->backTrace(n, searchable);
+
+                cout<<this->numberOfNodesEvaluated<<endl;
+                double c = 0;
+                for (State<Cell, double> *state: backTraceV) {
+                    c += state->getFirstCost();
+                }
+                cout << c << endl;
+
                 this->resetAllFields();
                 return backTraceV;
             }
@@ -52,7 +58,6 @@ public:
         }
     }
 };
-
 
 
 #endif //PROJECT2_BESTFIRSTSEARCH_H
