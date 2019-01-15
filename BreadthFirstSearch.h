@@ -29,7 +29,9 @@ public:
             this->q.pop();
             this->numberOfNodesEvaluated++;
             if (*n == *searchable->getIGoallState()) {
-                return this->backTrace(n, searchable);
+                vector<State<Cell, double>*> backTraceV = this->backTrace(n, searchable);;
+                this->resetAllFields();
+                return backTraceV;
             }
             // calling the delegated method, returns a vector of states with n as a parent
             vector<State<T, C> *> successors = searchable->getAllPossibleStates(n);
@@ -63,6 +65,12 @@ public:
             }
         }
         return false;
+    }
+
+    void resetAllFields() {
+        this->numberOfNodesEvaluated = 0;
+        this->openPriorityQueue = MyPriorityQueue<T, C>();
+        this->closedSet.clear();
     }
 };
 
