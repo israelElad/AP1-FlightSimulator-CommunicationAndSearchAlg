@@ -74,5 +74,4 @@ public:
     }
 };
 
-
 #endif //PROJECT2_DEPTHFIRSTSEARCH_H
