@@ -21,11 +21,12 @@ public:
         while (!this->openPriorityQueue.empty()) {
             // remove the node in openPriorityQueue having the lowest cost
             State<T, C> *n = this->openPriorityQueue.top();
+            double nH = heuristicFunc(n);
             this->openPriorityQueue.pop();
             this->numberOfNodesEvaluated++;
             this->closedSet.insert(n);
             if (*n == *searchable->getIGoallState()) {
-                vector<State<Cell, double>*> backTraceV = this->backTrace(n, searchable);;
+                vector<State<Cell, double> *> backTraceV = this->backTrace(n, searchable);;
                 this->resetAllFields();
                 return backTraceV;
             }
@@ -38,12 +39,12 @@ public:
                 //  If s is not in CLOSED and s is not in OPEN
                 if ((!setContains(s)) && (!this->openPriorityQueueContains(s))) {
                     s->setCameFrom(n);
-                    s->setCost(s->getCost() + s->getCameFrom()->getCost() + heuristicFunc(s));
+                    s->setCost(s->getCost() + s->getCameFrom()->getCost() + heuristicFunc(s) - nH);
                     this->openPriorityQueue.push(s);
                 } else {
                     if (!setContains(s)) {
                         s->setCameFrom(n);
-                        s->setCost(s->getCost() + s->getCameFrom()->getCost() + heuristicFunc(s));
+                        s->setCost(s->getCost() + s->getCameFrom()->getCost() + heuristicFunc(s) - nH);
                         if (s->getCost() < this->getStateFromOpenPriorityQueue(s)->getCost()) {
                             this->openPriorityQueue.remove(s); // we remove n with bigger cost
                             this->openPriorityQueue.push(s); // we add n with chipper cost
