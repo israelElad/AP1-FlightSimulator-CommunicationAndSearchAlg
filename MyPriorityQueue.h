@@ -27,7 +27,6 @@ public:
         auto it = std::find(this->c.begin(), this->c.end(), value);
         if (it != this->c.end()) {
             this->c.erase(it);
-            // todo: check if necessary
             std::make_heap(this->c.begin(), this->c.end(), this->comp);
             return true;
         } else {
