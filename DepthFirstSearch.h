@@ -69,8 +69,8 @@ public:
 
     void resetAllFields() {
         this->numberOfNodesEvaluated = 0;
-        this->openPriorityQueue = MyPriorityQueue<T, C>();
-        this->closedSet.clear();
+        this->stackStates = stack<State<T, C> *>();
+        this->visited.clear();
     }
 };
 

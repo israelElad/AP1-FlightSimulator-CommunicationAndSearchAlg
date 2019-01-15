@@ -69,8 +69,8 @@ public:
 
     void resetAllFields() {
         this->numberOfNodesEvaluated = 0;
-        this->openPriorityQueue = MyPriorityQueue<T, C>();
-        this->closedSet.clear();
+        this->q = queue<State<T, C> *>();
+        this->visited.clear();
     }
 };
 
