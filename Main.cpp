@@ -10,6 +10,7 @@
 #include "BestFirstSearch.h"
 #include "SolverSearcherAdapter.h"
 #include "BreadthFirstSearch.h"
+#include "DepthFirstSearch.h"
 
 using namespace std;
 
@@ -33,7 +34,7 @@ int main(int argc, char *argv[]) {
     auto *e = new State<Cell, double>(c2);
     ISearchable<Cell, double> *matrix = new Matrix(4, 4, values, s, e);
 
-    ISearcher<vector<State<Cell, double> *>, Cell, double> *b = new BreadthFirstSearch<Cell, double>();
+    ISearcher<vector<State<Cell, double> *>, Cell, double> *b = new BestFirstSearch<Cell, double>();
     Solver<ISearchable<Cell, double> *, vector<State<Cell, double> *>> *solver = new
             SolverSearcherAdapter<vector<State<Cell, double> *>, Cell, double>(b);
     CacheManager<string, string>* cacheManager = new FileCacheManager();
@@ -46,6 +47,7 @@ int main(int argc, char *argv[]) {
     } else {
         vector<State<Cell, double> *> solutionV = solver->solve(matrix);
         string solution=pathVecToStrDirectionsTemp(solutionV);
+        cout << solution << endl;
         cacheManager->saveSolution(problemStr, solution);
     }
     delete (cacheManager);

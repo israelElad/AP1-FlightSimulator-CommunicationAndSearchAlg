@@ -1,7 +1,3 @@
-//
-// Created by elad on 13/01/19.
-//
-
 #ifndef PROJECT2_ABSTRACTSERVER_H
 #define PROJECT2_ABSTRACTSERVER_H
 
@@ -70,6 +66,9 @@ namespace server_side {
             timeout.tv_usec = 0;
 
             setsockopt(socketFd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout));
+        }
+
+        virtual ~AbstractServer(){
 
         }
     };

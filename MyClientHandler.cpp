@@ -62,6 +62,7 @@ void MyClientHandler::handleClient(int newSocketFd) {
     int j1 = static_cast<int>(startStrSeparated.at(1));
     Cell c1 = Cell(i1, j1);
     auto *s = new State<Cell, double>(c1);
+    this->deathVector1.push_back(s);
 
     // create exit state
     string exitStr = dataFromClient.at(numOfMatrixRows + 1);
@@ -71,10 +72,12 @@ void MyClientHandler::handleClient(int newSocketFd) {
     int j2 = static_cast<int>(startStrSeparated.at(1));
     Cell c2 = Cell(i2, j2);
     auto *e = new State<Cell, double>(c2);
+    this->deathVector1.push_back(e);
 
     // create the matrix
     ISearchable<Cell, double> *matrix = new Matrix(static_cast<int>(numOfMatrixRows),
                                                    static_cast<int>(numOfMatrixColumns), values, s, e);
+    this->deathVector2.push_back(matrix);
 
     bool checkResult = this->cacheManager->isSaved(problemStr);
     if (checkResult) {

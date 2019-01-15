@@ -16,6 +16,10 @@ public:
     virtual State<T, C>* getIGoallState() = 0;
 
     virtual vector<State<T, C>*> getAllPossibleStates(State<T, C>* state) = 0;
+
+    virtual ~ISearchable(){
+
+    }
 };
 
 

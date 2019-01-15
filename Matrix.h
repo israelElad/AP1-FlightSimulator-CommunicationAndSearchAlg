@@ -11,20 +11,27 @@ class Matrix : public ISearchable<Cell, double> {
     int n;
     int m;
     vector<vector<double>> values;
-    State<Cell, double>* initialState;
-    State<Cell, double>* goalState;
+    State<Cell, double> *initialState;
+    State<Cell, double> *goalState;
+    vector<State<Cell, double> *> deathVector;
 
 public:
-    Matrix(int n, int m, vector<vector<double>> &values, State<Cell, double>* initialState,
-                   State<Cell, double>* goalState);
+    Matrix(int n, int m, vector<vector<double>> &values, State<Cell, double> *initialState,
+           State<Cell, double> *goalState);
 
-    virtual State<Cell, double>* getInitialState();
+    virtual State<Cell, double> *getInitialState();
 
-    virtual State<Cell, double>* getIGoallState();
+    virtual State<Cell, double> *getIGoallState();
 
-    virtual vector<State<Cell, double>*> getAllPossibleStates(State<Cell, double>* state);
+    virtual vector<State<Cell, double> *> getAllPossibleStates(State<Cell, double> *state);
 
     double getValue(Cell cell);
+
+    virtual ~Matrix() {
+        for (State<Cell, double> *state:this->deathVector) {
+            delete (state);
+        }
+    }
 };
 
 

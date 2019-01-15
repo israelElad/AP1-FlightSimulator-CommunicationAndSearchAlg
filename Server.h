@@ -12,7 +12,11 @@ namespace server_side {
         virtual void open(int port, ClientHandler *clientHandler) = 0;
 
         // close the server
-        virtual void stop()=0;
+        virtual void stop() = 0;
+
+        virtual ~Server() {
+
+        }
     };
 }
 

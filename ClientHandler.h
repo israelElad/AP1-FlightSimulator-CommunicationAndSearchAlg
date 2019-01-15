@@ -8,6 +8,10 @@ using namespace std;
 class ClientHandler {
 public:
     virtual void handleClient(int newSocketFd) = 0;
+
+    virtual ~ClientHandler(){
+
+    }
 };
 
 #endif //PROJECT2_CLIENTHANDLER_H
