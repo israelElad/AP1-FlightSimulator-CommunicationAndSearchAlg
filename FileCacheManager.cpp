@@ -13,11 +13,11 @@ FileCacheManager::FileCacheManager() {
     loadToMap();
 }
 
-bool FileCacheManager::isSaved(const string &problem) {
+bool FileCacheManager::isSaved(string problem) {
     return this->problemToSolution.count(problem) >= 1;
 }
 
-string FileCacheManager::getSolution(const string &problem) {
+string FileCacheManager::getSolution(string problem) {
     string solution;
     if (this->problemToSolution.count(problem) < 1) {
         throw "There is no solution to this problem!";
@@ -25,7 +25,7 @@ string FileCacheManager::getSolution(const string &problem) {
     return this->problemToSolution.at(problem);
 }
 
-void FileCacheManager::saveSolution(const string &problem, const string &solution) {
+void FileCacheManager::saveSolution(string problem, string solution) {
     this->problemToSolution.insert(pair<string, string>(problem, solution));
 }
 
@@ -56,10 +56,6 @@ void FileCacheManager::saveInFile() {
         itPTS++;
     }
     file.close();
-}
-
-FileCacheManager::~FileCacheManager() {
-    saveInFile();
 }
 
 

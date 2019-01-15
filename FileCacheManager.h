@@ -15,13 +15,13 @@ public:
     FileCacheManager();
 
     // check if the solution to the problem is already saved
-    virtual bool isSaved(const string &problem);
+    virtual bool isSaved(string problem);
 
     // get the solution. The user have to check if the solution isSaved cameFrom get it.
-    virtual string getSolution(const string &problem);
+    virtual string getSolution(string problem);
 
     // save the solution to the problem
-    virtual void saveSolution(const string &problem, const string &solution);
+    virtual void saveSolution(string problem, string solution);
 
     // load all the problems with their solution to the problemToSolution map
     void loadToMap();
@@ -29,7 +29,9 @@ public:
     // save all the problems with their solution in the map
     void saveInFile();
 
-    ~FileCacheManager();
+    virtual ~FileCacheManager(){
+        saveInFile();
+    }
 };
 
 

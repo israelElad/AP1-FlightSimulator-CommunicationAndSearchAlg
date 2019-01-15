@@ -16,6 +16,10 @@ public:
     virtual S getSolution(P problem) = 0;
 
     virtual void saveSolution(P problem, S solution) = 0;
+
+    virtual ~CacheManager(){
+
+    }
 };
 
 #endif //PROJECT2_CACHEMANAGER_H

@@ -13,26 +13,65 @@
 
 using namespace std;
 
+string pathVecToStrDirectionsTemp(vector<State<Cell, double> *> &solutionVector);
+
 
 int main(int argc, char *argv[]) {
-    vector<vector<double>> values = {{0,  1,  2,  3},
-                                     {4,  5,  6,  7},
-                                     {8,  9,  10, 11},
-                                     {12, 13, 14, 15}};
+    /* P = ISearchable<Cell, double>*
+     * S = vector<State<Cell, double> *>
+     * T = Cell
+     * C = double
+     * */
+    vector<vector<double>> values = {{0,1,2,3},
+                                     {4,5,6,7},
+                                     {8,9,10,11},
+                                     {12,13,14,15}};
+    string problemStr = "@0,1,2,3@4,5,6,7@8,9,10,11@12,13,14,15~0,0~3,3";
     Cell c1 = Cell(0, 0);
-    auto * s = new State<Cell, double>(c1);
+    auto *s = new State<Cell, double>(c1);
     Cell c2 = Cell(3, 3);
-    auto * e = new State<Cell, double>(c2);
-    ISearchable<Cell, double>* matrix = new Matrix(4, 4, values, s, e);
+    auto *e = new State<Cell, double>(c2);
+    ISearchable<Cell, double> *matrix = new Matrix(4, 4, values, s, e);
 
     ISearcher<vector<State<Cell, double> *>, Cell, double> *b = new BreadthFirstSearch<Cell, double>();
-    Solver<ISearchable<Cell, double>*, vector<State<Cell, double> *>> *solver = new
+    Solver<ISearchable<Cell, double> *, vector<State<Cell, double> *>> *solver = new
             SolverSearcherAdapter<vector<State<Cell, double> *>, Cell, double>(b);
+    CacheManager<string, string>* cacheManager = new FileCacheManager();
 
+    bool checkResult = cacheManager->isSaved(problemStr);
+    if (checkResult) {
+        //converts solution to string in order to send it to the client
+        string solution = cacheManager->getSolution(problemStr);
+        cout << solution << endl;
+    } else {
+        vector<State<Cell, double> *> solutionV = solver->solve(matrix);
+        string solution=pathVecToStrDirectionsTemp(solutionV);
+        cacheManager->saveSolution(problemStr, solution);
+    }
+    delete (cacheManager);
+}
 
-    vector<State<Cell, double> *> solutionVector =solver->solve(matrix);
-    cout<<"hi"<<endl;
-
+string pathVecToStrDirectionsTemp(vector<State<Cell, double> *> &solutionVector){
+    int iCurrent=solutionVector.at(0)->getState().getI();
+    int jCurrent=solutionVector.at(0)->getState().getJ();
+    string directions;
+    for(auto current=solutionVector.begin();current!=solutionVector.end();current++){
+        int iNext=(*current)->getState().getI();
+        int jNext=(*current)->getState().getJ();
+        if(iCurrent<iNext){ // below row- Down
+            directions+="Down,";
+        }else if(iCurrent>iNext){ //above row - Up
+            directions+="Up,";
+        }else if(jCurrent<jNext){ //right Cell - Right
+            directions+="Right,";
+        }else if(jCurrent>jNext){ //left Cell - Left
+            directions+="Left,";
+        }
+        iCurrent=iNext;
+        jCurrent=jNext;
+    }
+    directions.erase(directions.length()-1,1); // delete last ','
+    return directions;
 }
 
 
