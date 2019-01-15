@@ -73,4 +73,5 @@ public:
     }
 };
 
+
 #endif //PROJECT2_ABSTRACTSEARCH_H
