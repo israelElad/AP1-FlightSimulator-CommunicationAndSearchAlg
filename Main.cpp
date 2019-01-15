@@ -12,6 +12,8 @@
 #include "BreadthFirstSearch.h"
 #include "CacheManager.h"
 #include "MyClientHandler.h"
+#include "DepthFirstSearch.h"
+#include "AStar.h"
 
 using namespace std;
 
@@ -56,7 +58,7 @@ int main(int argc, char *argv[]) {
         return -1;
     }
     int port = stoi(argv[1]);
-    ISearcher<vector<State<Cell, double> *>, Cell, double> *b = new BreadthFirstSearch<Cell, double>();
+    ISearcher<vector<State<Cell, double> *>, Cell, double> *b = new DepthFirstSearch<Cell, double>();
     Solver<ISearchable<Cell, double> *, vector<State<Cell, double> *>> *solver = new
             SolverSearcherAdapter<vector<State<Cell, double> *>, Cell, double>(b);
     FileCacheManager::CacheManager *cacheManager = new FileCacheManager();

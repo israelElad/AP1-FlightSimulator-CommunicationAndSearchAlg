@@ -21,12 +21,14 @@ public:
         while (!this->openPriorityQueue.empty()) {
             // remove the node in openPriorityQueue having the lowest cost
             State<T, C> *n = this->openPriorityQueue.top();
-            double nH = heuristicFunc(n);
+            double nH = heuristicFunc(n, searchable);
             this->openPriorityQueue.pop();
             this->numberOfNodesEvaluated++;
             this->closedSet.insert(n);
             if (*n == *searchable->getIGoallState()) {
-                vector<State<Cell, double> *> backTraceV = this->backTrace(n, searchable);;
+                vector<State<Cell, double> *> backTraceV = this->backTrace(n, searchable);
+//                cout<<this->numberOfNodesEvaluated<<endl;
+                cout<<n->getCost()+n->getCameFrom()->getCost()<<endl;
                 this->resetAllFields();
                 return backTraceV;
             }
@@ -37,14 +39,14 @@ public:
                     s->setCost(numeric_limits<C>::infinity());
                 }
                 //  If s is not in CLOSED and s is not in OPEN
-                if ((!setContains(s)) && (!this->openPriorityQueueContains(s))) {
+                if ((!this->setContains(s)) && (!this->openPriorityQueueContains(s))) {
                     s->setCameFrom(n);
-                    s->setCost(s->getCost() + s->getCameFrom()->getCost() + heuristicFunc(s) - nH);
+                    s->setCost(s->getCost() + s->getCameFrom()->getCost() + heuristicFunc(s, searchable) - nH);
                     this->openPriorityQueue.push(s);
                 } else {
-                    if (!setContains(s)) {
+                    if (!this->setContains(s)) {
                         s->setCameFrom(n);
-                        s->setCost(s->getCost() + s->getCameFrom()->getCost() + heuristicFunc(s) - nH);
+                        s->setCost(s->getCost() + s->getCameFrom()->getCost() + heuristicFunc(s, searchable) - nH);
                         if (s->getCost() < this->getStateFromOpenPriorityQueue(s)->getCost()) {
                             this->openPriorityQueue.remove(s); // we remove n with bigger cost
                             this->openPriorityQueue.push(s); // we add n with chipper cost

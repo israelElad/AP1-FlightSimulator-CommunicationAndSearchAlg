@@ -97,7 +97,7 @@ void MyClientHandler::handleClient(int newSocketFd) {
 
 // reading line from socket
 string MyClientHandler::readLineFromSocket(int newSocketFd) {
-    cout << "in readline" << endl;
+//    cout << "in readline" << endl;
 
     //read line into buffer
     char buffer[1024];

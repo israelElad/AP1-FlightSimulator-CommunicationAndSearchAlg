@@ -22,6 +22,8 @@ public:
             this->closedSet.insert(n);
             if (*n == *searchable->getIGoallState()) {
                 vector<State<Cell, double>*> backTraceV = this->backTrace(n, searchable);;
+//                cout<<this->numberOfNodesEvaluated<<endl;
+                cout<<n->getCost()+n->getCameFrom()->getCost()<<endl;
                 this->resetAllFields();
                 return backTraceV;
             }
