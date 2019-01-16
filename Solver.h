@@ -10,9 +10,7 @@ public:
     // Solve a problem
     virtual S solve(P problem) = 0;
 
-    virtual ~Solver() {
-
-    }
+    virtual ~Solver() {}
 };
 
 #endif //PROJECT2_SOLVER_H

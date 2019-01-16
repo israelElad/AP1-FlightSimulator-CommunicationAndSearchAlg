@@ -1,7 +1,13 @@
+/******************************************
+* Simulator project- second milestone
+* Elad Israel
+* 313448888
+* Narkis Shallev Kermizi
+* 205832447
+******************************************/
+
 #include <vector>
 #include "MySerialServer.h"
-#include "MyTestClientHandler.h"
-#include "StringReverser.h"
 #include "FileCacheManager.h"
 #include "MyParallelServer.h"
 #include "Cell.h"
@@ -42,8 +48,6 @@ int main(int argc, char *argv[]) {
     delete (solver);
     delete (clientHandler);
     delete (serial);
-
-    cout << "hi" << endl;
 
     return 0;
 }

@@ -14,12 +14,12 @@
 
 namespace server_side {
 
-    class AbstractServer :public Server{
+    class AbstractServer : public Server {
     protected:
-        bool shouldStop=false;
-        int port=0;
-        ClientHandler *clientHandler= nullptr;
-        int socketFd=0, newSocketFd=0, clientLen=0;
+        bool shouldStop = false;
+        int port = 0;
+        ClientHandler *clientHandler = nullptr;
+        int socketFd = 0, newSocketFd = 0, clientLen = 0;
         struct sockaddr_in serv_addr{}, cli_addr{};
 
     public:
@@ -27,17 +27,12 @@ namespace server_side {
         virtual void open(int port, ClientHandler *clientHandler) = 0;
 
         // close the server
-        virtual void stop(){
-            cout<<"shouldStop=";
-            this->shouldStop=true;
-            cout<<shouldStop<<endl;
+        virtual void stop() {
+            this->shouldStop = true;
         }
 
-        void setUpServer(){
-
-            cout<< "bla"<<endl;
-
-            cout<< "in while"<<endl;
+        //set server's initial values
+        void setUpServer() {
             int n;
             // First call to socket() function
             socketFd = socket(AF_INET, SOCK_STREAM, 0);
@@ -62,16 +57,13 @@ namespace server_side {
             clientLen = sizeof(cli_addr);
 
             timeval timeout;
-            timeout.tv_sec = 3;
-            //todo: change to 1
-            timeout.tv_usec = 0;
+            timeout.tv_sec = 1;
+            timeout.tv_usec = 1;
 
-            setsockopt(socketFd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout));
+            setsockopt(socketFd, SOL_SOCKET, SO_RCVTIMEO, (char *) &timeout, sizeof(timeout));
         }
 
-        virtual ~AbstractServer(){
-
-        }
+        virtual ~AbstractServer() {}
     };
 
 }

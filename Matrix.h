@@ -19,12 +19,16 @@ public:
     Matrix(int n, int m, vector<vector<double>> &values, State<Cell, double> *initialState,
            State<Cell, double> *goalState);
 
+    //get initial state
     virtual State<Cell, double> *getInitialState();
 
+    //get goal state
     virtual State<Cell, double> *getIGoallState();
 
+    //get all possible next states from current state received
     virtual vector<State<Cell, double> *> getAllPossibleStates(State<Cell, double> *state);
 
+    //get Cell's value
     double getValue(Cell cell);
 
     virtual ~Matrix() {

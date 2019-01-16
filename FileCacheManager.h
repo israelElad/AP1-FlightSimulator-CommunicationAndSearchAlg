@@ -29,7 +29,7 @@ public:
     // save all the problems with their solution in the map
     void saveInFile();
 
-    virtual ~FileCacheManager(){
+    virtual ~FileCacheManager() {
         saveInFile();
     }
 };

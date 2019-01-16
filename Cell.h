@@ -7,8 +7,11 @@ class Cell {
     int j;
 public:
     Cell(int i, int j);
+
     int getI();
+
     int getJ();
+
     bool operator==(Cell otherCell);
 };
 

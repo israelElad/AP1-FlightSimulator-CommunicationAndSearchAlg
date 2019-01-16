@@ -29,12 +29,13 @@ public:
             if (*n == *searchable->getIGoallState()) {
                 vector<State<Cell, double> *> backTraceV = this->backTrace(n, searchable);
 
-                cout<<this->numberOfNodesEvaluated<<endl;
-                double c = 0;
-                for (State<Cell, double> *state: backTraceV) {
-                    c += state->getFirstCost();
-                }
-                cout << c << endl;
+//                //number of nodes evaluated and cost
+//                cout<<this->numberOfNodesEvaluated<<endl;
+//                double c = 0;
+//                for (State<Cell, double> *state: backTraceV) {
+//                    c += state->getFirstCost();
+//                }
+//                cout << c << endl;
 
                 this->resetAllFields();
                 return backTraceV;
@@ -64,6 +65,7 @@ public:
         }
     }
 
+    //calculate the heuristic function
     double heuristicFunc(State<Cell, double> *state, ISearchable<T, C> *searchable) {
         State<Cell, double> *exit = searchable->getIGoallState();
         int i1 = state->getState().getI();

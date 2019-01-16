@@ -11,15 +11,17 @@ template<typename T, typename C>
 class ISearchable {
 
 public:
-    virtual State<T, C>* getInitialState() = 0;
 
-    virtual State<T, C>* getIGoallState() = 0;
+    //get initial state
+    virtual State<T, C> *getInitialState() = 0;
 
-    virtual vector<State<T, C>*> getAllPossibleStates(State<T, C>* state) = 0;
+    //get goal state
+    virtual State<T, C> *getIGoallState() = 0;
 
-    virtual ~ISearchable(){
+    //get all possible next states from current state received
+    virtual vector<State<T, C> *> getAllPossibleStates(State<T, C> *state) = 0;
 
-    }
+    virtual ~ISearchable() {}
 };
 
 #endif //PROJECT2_ISEARCHABLE_H

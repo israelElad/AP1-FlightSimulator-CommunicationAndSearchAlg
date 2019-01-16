@@ -24,10 +24,7 @@ MyClientHandler::MyClientHandler(Solver<ISearchable<Cell, double> *, vector<Stat
 }
 
 void MyClientHandler::handleClient(int newSocketFd) {
-    cout << "entered handle client" << endl;
     string buffer = readLineFromSocket(newSocketFd);
-    cout << "after readline" << endl;
-
     vector<string> dataFromClient;
 
     // put all the data from the client in a vector
@@ -114,8 +111,6 @@ string MyClientHandler::eraseSpaces(string str) {
 
 // reading line from socket
 string MyClientHandler::readLineFromSocket(int newSocketFd) {
-//    cout << "in readline" << endl;
-
     //read line into buffer
     char buffer[1024];
     int n = 0;

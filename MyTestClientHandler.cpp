@@ -13,10 +13,7 @@ MyTestClientHandler::MyTestClientHandler(Solver<string, string> *solver, CacheMa
 }
 
 void MyTestClientHandler::handleClient(int newSocketFd) {
-    cout<<"entered handle client"<<endl;
-    string buffer=readLineFromSocket(newSocketFd);
-    cout<<"after readline"<<endl;
-
+    string buffer = readLineFromSocket(newSocketFd);
     while (strcmp(buffer.c_str(), "end") != 0) {
         bool checkResult = this->cacheManager->isSaved(buffer);
         if (checkResult) {
@@ -28,7 +25,7 @@ void MyTestClientHandler::handleClient(int newSocketFd) {
             this->cacheManager->saveSolution(buffer, solution);
             send(newSocketFd, solution.c_str(), solution.length(), 0);
         }
-        buffer=readLineFromSocket(newSocketFd);
+        buffer = readLineFromSocket(newSocketFd);
     }
     //close client socket
     close(newSocketFd);
@@ -40,20 +37,20 @@ string MyTestClientHandler::readLineFromSocket(int newSocketFd) {
     int n = 0;
     char c = 'n';
     int idx = 0;
-    while (true)   {
+    while (true) {
         n = static_cast<int>(read(newSocketFd, &c, 1));
         if (n < 0) {
-            if(errno == EWOULDBLOCK){
-                cout<<"reading timeout, trying again"<<endl;
+            if (errno == EWOULDBLOCK) {
+                cout << "reading timeout, trying again" << endl;
                 continue;
             }
             perror("ERROR reading from socket");
             return nullptr;
-        }   else if (n == 0)    {
+        } else if (n == 0) {
             perror("Socket is closed");
             return nullptr;
         }
-        if(c == '\n'){
+        if (c == '\n') {
             break;
         }
         buffer[idx++] = c;

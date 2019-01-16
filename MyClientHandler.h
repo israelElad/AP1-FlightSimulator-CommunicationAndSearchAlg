@@ -16,6 +16,7 @@ private:
     Solver<ISearchable<Cell, double> *, vector<State<Cell, double> *>> *solver;
     CacheManager<string, string> *cacheManager;
 
+    //convert the path as vector of states to directions(Up,Down...)
     string pathVecToStrDirections(vector<State<Cell, double> *> &solutionVector);
 
     vector<State<Cell, double> *> deathVector1;
@@ -24,8 +25,10 @@ public:
     MyClientHandler(Solver<ISearchable<Cell, double> *, vector<State<Cell, double> *>> *solver,
                     CacheManager<string, string> *cacheManager);
 
+    //handle client
     virtual void handleClient(int newSocketFd);
 
+    //read line from socket
     string readLineFromSocket(int newSocketFd);
 
     vector<double> separateDoublesByComma(string &row);

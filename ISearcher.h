@@ -9,13 +9,12 @@ template<typename S, typename T, typename C>
 class ISearcher {
 public:
     // the search method
-    virtual S search(ISearchable<T, C>* searchable) = 0;
+    virtual S search(ISearchable<T, C> *searchable) = 0;
+
     // get how many nodes were evaluated by the algorithm
     virtual int getNumberOfNodesEvaluated() = 0;
 
-    virtual ~ISearcher(){
-
-    }
+    virtual ~ISearcher() {}
 };
 
 #endif //PROJECT2_ISEARCHER_H
