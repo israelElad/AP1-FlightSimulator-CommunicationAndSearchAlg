@@ -17,10 +17,8 @@
 
 using namespace std;
 
-string pathVecToStrDirectionsTemp(vector<State<Cell, double> *> &solutionVector);
-
-
 int main(int argc, char *argv[]) {
+
     /* P = ISearchable<Cell, double>*
      * S = vector<State<Cell, double> *>
      * T = Cell

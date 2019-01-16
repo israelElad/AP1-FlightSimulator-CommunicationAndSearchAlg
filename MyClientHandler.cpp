@@ -79,6 +79,8 @@ void MyClientHandler::handleClient(int newSocketFd) {
                                                    static_cast<int>(numOfMatrixColumns), values, s, e);
     this->deathVector2.push_back(matrix);
 
+    problemStr = this->eraseSpaces(problemStr);
+
     bool checkResult = this->cacheManager->isSaved(problemStr);
     if (checkResult) {
         //converts solution to string in order to send it to the client
@@ -86,13 +88,28 @@ void MyClientHandler::handleClient(int newSocketFd) {
         send(newSocketFd, solution.c_str(), solution.length(), 0);
     } else {
         vector<State<Cell, double> *> solutionV = this->solver->solve(matrix);
-        string solution=pathVecToStrDirections(solutionV);
+        string solution = pathVecToStrDirections(solutionV);
         this->cacheManager->saveSolution(problemStr, solution);
         send(newSocketFd, solution.c_str(), solution.length(), 0);
     }
 
     //close client socket
     close(newSocketFd);
+}
+
+// erase space from a string
+string MyClientHandler::eraseSpaces(string str) {
+    string withoutSpaces;
+    auto begin = str.begin();
+    while (begin != str.end()) {
+        if (isspace(*begin)) {
+            begin++;
+            continue;
+        }
+        withoutSpaces += (*begin);
+        begin++;
+    }
+    return withoutSpaces;
 }
 
 // reading line from socket
@@ -139,25 +156,25 @@ vector<double> MyClientHandler::separateDoublesByComma(string &row) {
     return separated;
 }
 
-string MyClientHandler::pathVecToStrDirections(vector<State<Cell, double> *> &solutionVector){
-    int iCurrent=solutionVector.at(0)->getState().getI();
-    int jCurrent=solutionVector.at(0)->getState().getJ();
+string MyClientHandler::pathVecToStrDirections(vector<State<Cell, double> *> &solutionVector) {
+    int iCurrent = solutionVector.at(0)->getState().getI();
+    int jCurrent = solutionVector.at(0)->getState().getJ();
     string directions;
-    for(auto current=solutionVector.begin();current!=solutionVector.end();current++){
-        int iNext=(*current)->getState().getI();
-        int jNext=(*current)->getState().getJ();
-        if(iCurrent<iNext){ // below row- Down
-            directions+="Down,";
-        }else if(iCurrent>iNext){ //above row - Up
-            directions+="Up,";
-        }else if(jCurrent<jNext){ //right Cell - Right
-            directions+="Right,";
-        }else if(jCurrent>jNext){ //left Cell - Left
-            directions+="Left,";
+    for (auto current = solutionVector.begin(); current != solutionVector.end(); current++) {
+        int iNext = (*current)->getState().getI();
+        int jNext = (*current)->getState().getJ();
+        if (iCurrent < iNext) { // below row- Down
+            directions += "Down,";
+        } else if (iCurrent > iNext) { //above row - Up
+            directions += "Up,";
+        } else if (jCurrent < jNext) { //right Cell - Right
+            directions += "Right,";
+        } else if (jCurrent > jNext) { //left Cell - Left
+            directions += "Left,";
         }
-        iCurrent=iNext;
-        jCurrent=jNext;
+        iCurrent = iNext;
+        jCurrent = jNext;
     }
-    directions.erase(directions.length()-1,1); // delete last ','
+    directions.erase(directions.length() - 1, 1); // delete last ','
     return directions;
 }

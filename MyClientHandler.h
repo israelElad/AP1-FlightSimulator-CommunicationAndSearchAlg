@@ -30,6 +30,8 @@ public:
 
     vector<double> separateDoublesByComma(string &row);
 
+    string eraseSpaces(string str);
+
     virtual ~MyClientHandler() {
         for (State<Cell, double> *state:this->deathVector1) {
             delete (state);
