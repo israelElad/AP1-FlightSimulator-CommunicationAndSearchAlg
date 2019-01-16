@@ -22,4 +22,5 @@ public:
     }
 };
 
+
 #endif //PROJECT2_CACHEMANAGER_H

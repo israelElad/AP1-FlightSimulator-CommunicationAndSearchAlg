@@ -45,7 +45,5 @@ int main(int argc, char *argv[]) {
 
     cout << "hi" << endl;
 
-    //todo:while true ??
-
     return 0;
 }

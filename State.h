@@ -68,5 +68,4 @@ public:
     }
 };
 
-
 #endif //PROJECT2_STATE_H

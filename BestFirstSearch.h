@@ -59,5 +59,4 @@ public:
     }
 };
 
-
 #endif //PROJECT2_BESTFIRSTSEARCH_H

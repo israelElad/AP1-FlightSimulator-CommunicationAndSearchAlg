@@ -61,4 +61,3 @@ string MyTestClientHandler::readLineFromSocket(int newSocketFd) {
     buffer[idx] = 0;
     return buffer;
 }
-

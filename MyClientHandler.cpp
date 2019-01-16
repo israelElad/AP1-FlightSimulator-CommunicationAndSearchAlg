@@ -178,3 +178,4 @@ string MyClientHandler::pathVecToStrDirections(vector<State<Cell, double> *> &so
     directions.erase(directions.length() - 1, 1); // delete last ','
     return directions;
 }
+

@@ -18,5 +18,4 @@ public:
     }
 };
 
-
 #endif //PROJECT2_ISEARCHER_H

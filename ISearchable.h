@@ -22,5 +22,4 @@ public:
     }
 };
 
-
 #endif //PROJECT2_ISEARCHABLE_H

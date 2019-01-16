@@ -58,3 +58,4 @@ vector<State<Cell, double> *> Matrix::getAllPossibleStates(State<Cell, double> *
 double Matrix::getValue(Cell cell) {
     return this->values[cell.getI()][cell.getJ()];
 }
+

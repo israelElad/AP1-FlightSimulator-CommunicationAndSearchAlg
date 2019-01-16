@@ -16,3 +16,4 @@ Cell::Cell(int i, int j) {
 bool Cell::operator==(Cell otherCell) {
     return ((this->i == otherCell.getI()) && (this->j == otherCell.getJ()));
 }
+

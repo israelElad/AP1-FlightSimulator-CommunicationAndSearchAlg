@@ -39,3 +39,4 @@ void MySerialServer::open(int port, ClientHandler *clientHandler) {
     cout<<"server closed"<<endl;
     close(socketFd);
 }
+

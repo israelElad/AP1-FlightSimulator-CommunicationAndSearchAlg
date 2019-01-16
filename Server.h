@@ -20,5 +20,4 @@ namespace server_side {
     };
 }
 
-
 #endif //PROJECT2_SERVER_H

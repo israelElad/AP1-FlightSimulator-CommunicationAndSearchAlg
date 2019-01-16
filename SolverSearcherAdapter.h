@@ -19,5 +19,4 @@ public:
     }
 };
 
-
 #endif //PROJECT2_SOLVERSEARCHERADAPTER_H

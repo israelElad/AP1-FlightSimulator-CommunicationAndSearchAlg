@@ -42,5 +42,4 @@ public:
     }
 };
 
-
 #endif //PROJECT2_MYCLIENTHANDLER_H

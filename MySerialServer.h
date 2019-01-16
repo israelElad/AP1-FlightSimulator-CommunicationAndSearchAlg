@@ -14,5 +14,4 @@ public:
     virtual void open(int port, ClientHandler *clientHandler);
 };
 
-
 #endif //PROJECT2_MYSERIALSERVER_H

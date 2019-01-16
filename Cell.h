@@ -12,5 +12,4 @@ public:
     bool operator==(Cell otherCell);
 };
 
-
 #endif //PROJECT2_CELL_H

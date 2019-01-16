@@ -34,5 +34,4 @@ public:
     }
 };
 
-
 #endif //PROJECT2_FILECACHEMANAGER_H

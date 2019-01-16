@@ -75,5 +75,4 @@ public:
     }
 };
 
-
 #endif //PROJECT2_ASTAR_H

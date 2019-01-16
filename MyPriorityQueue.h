@@ -35,5 +35,4 @@ public:
     }
 };
 
-
 #endif //PROJECT2_MYPRIORITYQUEUE_H

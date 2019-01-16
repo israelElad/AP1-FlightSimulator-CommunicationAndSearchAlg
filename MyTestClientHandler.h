@@ -18,5 +18,4 @@ public:
     string readLineFromSocket(int newSocketFd);
 };
 
-
 #endif //PROJECT2_MYTESTCLIENTHANDLER_H
