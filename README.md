@@ -88,8 +88,7 @@ For example, 0 is free or a plain, the greater the value, the more difficult the
 
 
 #### The results:
-![Algorithms_Comparison]()
-
+<img src="https://user-images.githubusercontent.com/45766976/115546497-c8647200-a2ad-11eb-8d55-c3b3844b376f.jpg" width="600">
 
 As you can see, the most efficient algorithm obtained is Astar, and therefore that is the algorithm we embedded on the server-side.<br/><br/><br/>
 
