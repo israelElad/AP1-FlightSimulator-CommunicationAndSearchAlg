@@ -1,5 +1,5 @@
 # AP1-FlightSimulator-CommunicationAndSearchAlg
-Second year first semester- "Advanced programming 1" course, second milestone- client, server, search algorithms: c++
+Second year first semester- "Advanced programming 1" course, second milestone- client, server, search algorithms: C++
 
 In this project, we used [SOLID](https://en.wikipedia.org/wiki/SOLID) principles (such as single responsibility & open/close) and design patterns (such as [Object Adapter](https://en.wikipedia.org/wiki/Adapter_pattern) & [Bridge](https://en.wikipedia.org/wiki/Bridge_pattern) patterns) to create a generic server for problem-solving and to use this server for implementing search algorithms. <br/>
 
